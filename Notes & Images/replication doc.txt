@@ -1,0 +1,75 @@
+
+
+create folders rs1, rs2, rs3, rs4 
+
+
+
+start mongod 
+
+
+
+mongod --replSet exrs --logpath .\rs1\rslog.log --dbpath .\rs1 --port 27017 --smallfiles --oplogSize 64
+
+
+
+mongod --replSet exrs  --dbpath .\rs2 --port 27018  --oplogSize 64
+
+
+
+mongod --replSet exrs  --dbpath .\rs3 --port 27019  --oplogSize 64
+
+
+
+
+
+config={
+
+	_id:"exrs", 
+
+	members:[
+
+		{_id:0, host:"localhost:27017"},
+
+		{_id:1, host:"localhost:27018"}, 
+
+		{_id:2, host:"localhost:27019" }
+
+	]
+
+}
+
+
+
+rs.initiate(config); 
+
+
+
+on primary > use repdb; 
+
+> db.emps.insert({}) -- couple of records 
+
+
+
+> mongo --port 27018 (which will open secondory terminal) 
+
+
+
+to query on secondory 
+
+> rs.slaveOk();  
+
+
+
+you can shutdown the primary server, goto mongo of primary 
+
+> db.shutdownServer(); 
+
+
+
+check now some secondory would have become primary 
+
+> rs.status(); 
+
+
+
+ 

@@ -1,0 +1,76 @@
+profiles 
+
+0 - off 
+1 - you can set the time (ms) 
+2 - on 
+
+
+>db.setProfilingLevel(2)
+
+db.system.profile.find({millis : {$gt:40}}, {docsExamined:1,keysExamined:1, planSummary:1, ts:1, command:1}).pretty();
+
+
+before you drop 
+>db.setProfilingLevel(0)
+db.setProfilingLevel(1, {millis:20})
+-- to drop the profile 
+db.system.profile.drop(); 
+
+
+db.createUser(
+{
+user: "myUserAdmin", pwd: "abc123",
+roles: [ { role: "readWrite",db: "ibmdb" }]
+})
+
+
+
+db.createUser(
+{
+user: "myUserAdmin1", pwd: "abc123",
+roles: [ { role: "userAdminAnyDatabase",db: "admin" }]
+}
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

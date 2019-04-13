@@ -1,0 +1,216 @@
+class Employee{
+	private int empId; 
+	private String empName; 
+	private double empSal; 
+	private Address addres; 
+}
+
+class Address {
+	private int houseNo; 
+	private String street; 
+	private String city; 
+}
+
+
+{
+	empId: 101, 
+	empName : "Harry", 
+	empSal : 3000, 
+	addres : {
+		houseNo: 1, 
+		street: "Stevens Creek Blvd", 
+		city: "Cupertino" 
+	}
+}
+
+select e.name, e.city, a.street 
+	from Employee e, Address a 
+	where e.empId = a.empId; 
+
+
+
+	
+	
+a table is called as collection 
+
+db.emps.insert(
+	{empid:101, empname:"Harry", empsal: 4444}
+); 
+db.emps.insert(
+	{empid:102, empname:"Peter", empsal: 4000}
+); 
+db.emps.insert(
+	{empid:103, empname:"Karry", empsal: 4400}
+); 
+	
+	
+show dbs;
+show collections; 
+db.emps.find();
+db.emps.find().pretty();  --> call backs 
+db.emps.findOne();
+	
+	
+	
+-- gives cursor
+var itr=db.emps.find(); 
+
+while(itr.hasNext()){
+	var temp = itr.next(); 
+	print(temp.empname.toUpperCase() + ", " + temp.empsal);
+}
+	
+-- create a collection and insert name in upper case and 
+	employee salary 
+
+	
+var itr=db.emps.find(); 
+
+while(itr.hasNext()){
+	var temp = itr.next(); 
+	db.emps1.insert({"empname" : temp.empname.toUpperCase(), "empsal":temp.empsal});
+}
+	
+-Capped Collection 
+
+
+db.createCollection("capcol", {capped: true, size:2048, max:5}); 
+	
+	
+db.capcol.insert({ratings:5, receipe:"Burger"});
+
+db.capcol.insert({ratings:6, receipe:"Fries"});
+db.capcol.insert({ratings:7, receipe:"Pulav"});
+db.capcol.insert({ratings:8, receipe:"Dosa"});
+db.capcol.insert({ratings:9, receipe:"Pizza"});
+
+db.capcol.insert({ratings:5, receipe:"Drink"});
+	
+	
+	
+	
+	
+hari  - 0 
+peter - 1
+harry - 2
+raja  - 3 
+rani  - 4 
+
+	
+	
+db.emps2.insert([{},{},{},{}])
+	
+	
+	
+	select * from emp where <condition>; -- selection 
+	select empid, empname from employee ; -- projection 
+	
+db.emps.find() -> db.emps.find({}); 
+
+db.emps.find({empid:101, empsal:4444});
+
+	
+db.emps.find({$or:[{empid:102}, {empsal:4444}]});
+	
+	
+db.emps.find(
+	{empsal : {$gte : 4000}}, 
+	{_id:0, empid:0, empname:1}); 
+
+
+	
+	
+	
+	select empid, empsal from emp; 
+	
+	
+	
+db.emps.insert(
+	{empname:"Amit", empsal: 5000}
+); 
+
+db.emps.find({empid:{$exists:true}}); 
+
+db.emps.find({empname: {$in:["Harry", "Peter"]}})
+
+	
+db.embed.insert({
+	empid:102, 
+	empname:"Anirbhan", 
+	empsal:5500, 
+	contact: {
+		email:"anirbhan@ibm.com", 
+		phone :"+22334455"
+	}, 
+	address:{
+		city: "Kolkatta", 
+		state : "West Bengal"
+	}
+})
+	
+	
+	
+	
+db.embed.find({"address.city":"Bengaluru"}, {_id:0, "address.state":1})
+	
+	
+	
+db.food.insert({name:"Pizza", ratings:[5,7,9]});
+db.food.insert({name:"Drinks", ratings:[3,4,5]});
+db.food.insert({name:"Burger", ratings:[7,8,9,]});
+db.food.insert({name:"Pulav", ratings:[8]});
+	
+	
+	
+db.food.find({ratings:[8]});	
+	
+	
+	
+db.food.find({ratings:{$elemMatch:{$gt:8}}}); 
+
+
+db.emps.update({empid:101}, {$set:{city:"Bengaluru"}}); 
+
+
+db.emps.update({empid:101}, {$set:{city:"Bengaluru"}}, {multi:true}); 
+
+db.emps.update({empid:105}, {$set:{empsal:3333, company:'IBM'}}, {
+upsert:true});
+	
+	
+db.emps.update({"_id" : ObjectId("5cadb9ec839a53f9cd9699c8")}, {$set:{empid:104}}); 
+
+
+db.emps.insert({_id:107, empname:"Sujith", empsal:3434});
+	
+db.emps.save({"_id" : ObjectId("5cadcf9a839a53f9cd9699cf"), empid:108, empname:"Tamal", email:"tamal@yahoo.com", empsal:3344});
+
+
+	
+db.emps.remove({empsal:4444});
+	
+	
+Got introduction to NoSQL  + MongoDB 
+Installing 
+CRUD - insert, save , upsert (c) 
+R ( find, findOne, find with conditional) 
+U (update ) 
+D ( remove) 
+arrays 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
